@@ -1,0 +1,22 @@
+name: CI Pipeline
+
+on: [push]  # Триггер: запускать при любом push
+
+jobs:
+  build-and-test:    # Имя job
+    runs-on: ubuntu-latest  # ОС для запуска
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt  # Если есть зависимости
+
+    - name: Run tests
+      run: python -m pytest  # Если есть тесты
